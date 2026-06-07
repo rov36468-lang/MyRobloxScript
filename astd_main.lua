@@ -12,7 +12,22 @@ local TweenService = game:GetService("TweenService")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
--- 1. สร้าง ScreenGui
+-- 1. ลบ GUI เก่าออกก่อน (ถ้ามี) เพื่อให้สีใหม่แสดงผล
+pcall(function()
+    local cg = game:GetService("CoreGui")
+    if cg:FindFirstChild("HandsomeBro_Hub") then
+        cg:FindFirstChild("HandsomeBro_Hub"):Destroy()
+    end
+end)
+pcall(function()
+    local pg = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+    if pg:FindFirstChild("HandsomeBro_Hub") then
+        pg:FindFirstChild("HandsomeBro_Hub"):Destroy()
+    end
+end)
+task.wait(0.1)
+
+-- สร้าง ScreenGui ใหม่
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "HandsomeBro_Hub"
 screenGui.ResetOnSpawn = false
@@ -25,6 +40,7 @@ if success and coreGui then
 else
     screenGui.Parent = playerGui
 end
+
 
 -- 2. หน้าต่างหลัก (Main Frame)
 local mainFrame = Instance.new("Frame")
