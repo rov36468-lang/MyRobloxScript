@@ -1,18 +1,20 @@
 -- =========================================================================
--- ⭐ ALL STAR TOWER DEFENSE - MULTI-TAB GUI HACK (WITH SUB-HEADERS) ⭐
+-- ⭐ พี่หล่อไหมน้อง Hub - MULTI-TAB GUI HACK ⭐
 -- =========================================================================
+-- สคริปต์นี้สร้างหน้าต่างเมนูช่วยเล่น (Hub UI) ที่มาพร้อมกับระบบ Scrollable Page
+-- และแสดง "หัวข้อเล็ก" (Sub-Headers) รวมถึงกล่องรายการรายละเอียดด้านขวาในแต่ละแท็บอย่างสวยงาม
+-- ปรับเปลี่ยนชื่อโปรเจกต์เป็น: พี่หล่อไหมน้อง
 
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
 local TweenService = game:GetService("TweenService")
-local MarketplaceService = game:GetService("MarketplaceService")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
 -- 1. สร้าง ScreenGui
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "ASTD_PremiumHub"
+screenGui.Name = "HandsomeBro_Hub"
 screenGui.ResetOnSpawn = false
 
 local success, coreGui = pcall(function()
@@ -60,14 +62,14 @@ sidebarPatch.BackgroundColor3 = Color3.fromRGB(18, 15, 27)
 sidebarPatch.BorderSizePixel = 0
 sidebarPatch.Parent = sidebar
 
--- หัวข้อโลโก้ใน Sidebar
+-- หัวข้อโลโก้ใน Sidebar (เปลี่ยนชื่อโปรเจกต์เป็น: พี่หล่อไหมน้อง)
 local logoLabel = Instance.new("TextLabel")
 logoLabel.Name = "Logo"
 logoLabel.Size = UDim2.new(1, 0, 0, 60)
 logoLabel.BackgroundTransparency = 1
-logoLabel.Text = "🌟 STAR HUB 🌟"
-logoLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
-logoLabel.TextSize = 18
+logoLabel.Text = "พี่หล่อไหมน้อง" -- ชื่อโลโก้หลัก
+logoLabel.TextColor3 = Color3.fromRGB(255, 215, 0) -- สีทอง
+logoLabel.TextSize = 16
 logoLabel.Font = Enum.Font.GothamBold
 logoLabel.Parent = sidebar
 
@@ -204,7 +206,7 @@ createListItem(pageHome, "ชื่อผู้เล่น: " .. player.Name, 2
 createListItem(pageHome, "ระดับเลเวล: " .. levelValue, 3)
 
 createSubHeader(pageHome, "สถานะการเชื่อมต่อ", 4)
-createListItem(pageHome, "เวอร์ชันสคริปต์: Star Hub v1.0.0", 5)
+createListItem(pageHome, "เวอร์ชันสคริปต์: พี่หล่อไหมน้อง Hub v1.0.0", 5)
 createListItem(pageHome, "ระบบตรวจจับแมพ: ปิดใช้งาน (รันได้ทุกห้อง)", 6)
 
 
@@ -336,10 +338,10 @@ end)
 -- 11. แจ้งเตือนสคริปต์โหลดเสร็จสิ้น
 pcall(function()
     StarterGui:SetCore("SendNotification", {
-        Title = "✨ Star Hub UI",
+        Title = "✨ พี่หล่อไหมน้อง Hub",
         Text = "โหลด UI เมนูแท็บเสร็จเรียบร้อย!",
         Duration = 3
     })
 end)
 
-print("[Star Hub] Multi-tab Premium UI loaded successfully!")
+print("[HandsomeBro Hub] Multi-tab Premium UI loaded successfully!")
