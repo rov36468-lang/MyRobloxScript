@@ -1,11 +1,10 @@
 -- =========================================================================
--- ⭐ ALL STAR TOWER DEFENSE UNIVERSAL LOADER (FIXED) ⭐
+-- ⭐ ALL STAR TOWER DEFENSE UNIVERSAL LOADER (NO MAP CHECK) ⭐
 -- =========================================================================
 
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
 local TweenService = game:GetService("TweenService")
-local MarketplaceService = game:GetService("MarketplaceService")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -56,7 +55,7 @@ statusLabel.Name = "Status"
 statusLabel.Size = UDim2.new(1, -30, 0, 80)
 statusLabel.Position = UDim2.new(0, 15, 0, 50)
 statusLabel.BackgroundTransparency = 1
-statusLabel.Text = "กำลังตรวจสอบข้อมูลเซิร์ฟเวอร์เกม..."
+statusLabel.Text = "กำลังเริ่มระบบการทำงาน..."
 statusLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
 statusLabel.TextSize = 14
 statusLabel.Font = Enum.Font.Gotham
@@ -89,40 +88,14 @@ closeButton.MouseButton1Click:Connect(function()
     screenGui:Destroy()
 end)
 
--- 6. ระบบตรวจสอบแมพและโหลดสคริปต์หลัก
+-- 6. ระบบทำงานอัตโนมัติโดยไม่มีการตรวจเช็คแมพ
 task.spawn(function()
-    task.wait(1.5) -- หน่วงจำลองการโหลด
+    task.wait(1.5) -- หน่วงจำลองการโหลดเพื่อให้สวยงาม
     
-    local astdPlaceId = 4996049426   -- ID หลักของเกม All Star Tower Defense (แก้ไขแล้ว)
-    local astdUniverseId = 1630139766 -- Universe ID ของ All Star Tower Defense (แก้ไขแล้ว)
-    local currentPlaceId = game.PlaceId
-    local currentGameId = game.GameId
+    statusLabel.Text = "✅ โหลดระบบสำเร็จ!\nยินดีต้อนรับสู่ตัวช่วยเล่นของคุณ"
+    statusLabel.TextColor3 = Color3.fromRGB(46, 204, 113) -- สีเขียวแสดงสถานะผ่าน
     
-    local isASTD = false
+    task.wait(1)
     
-    -- ตรวจสอบผ่าน Place ID หรือ Universe ID ตรงๆ
-    if currentPlaceId == astdPlaceId or currentGameId == astdUniverseId then
-        isASTD = true
-    else
-        -- ค้นหาเพิ่มเติมด้วยข้อความในชื่อแมพ (กันเหนียว)
-        local successScan, placeInfo = pcall(function()
-            return MarketplaceService:GetProductInfo(currentPlaceId)
-        end)
-        
-        if successScan and placeInfo and placeInfo.Name then
-            local lowerName = string.lower(placeInfo.Name)
-            if string.find(lowerName, "all star tower defense") or string.find(lowerName, "astd") then
-                isASTD = true
-            end
-        end
-    end
-    
-    -- 7. ผลลัพธ์การตรวจสอบ
-    if isASTD then
-        statusLabel.Text = "✅ ตรวจพบแมพ: All Star Tower Defense\nยินดีต้อนรับสู่ตัวช่วยเล่นของคุณ!"
-        statusLabel.TextColor3 = Color3.fromRGB(46, 204, 113) -- สีเขียวสำเร็จ
-    else
-        statusLabel.Text = "❌ ตรวจพบแมพอื่น! สคริปต์นี้รองรับเฉพาะ All Star Tower Defense เท่านั้น\n(รหัสแมพปัจจุบัน: " .. tostring(currentPlaceId) .. ")"
-        statusLabel.TextColor3 = Color3.fromRGB(231, 76, 60) -- สีแดงแจ้งเตือน
-    end
+    -- [[ ถ้าคุณมีโค้ดช่วยเล่น หรือฟังก์ชันอื่นเพิ่มเติม สามารถนำมาวางรันตรงนี้ได้เลยครับ ]]
 end)
