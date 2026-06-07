@@ -1,5 +1,5 @@
 -- =========================================================================
--- ⭐ ALL STAR TOWER DEFENSE UNIVERSAL LOADER ⭐
+-- ⭐ ALL STAR TOWER DEFENSE UNIVERSAL LOADER (FIXED) ⭐
 -- =========================================================================
 
 local Players = game:GetService("Players")
@@ -89,37 +89,40 @@ closeButton.MouseButton1Click:Connect(function()
     screenGui:Destroy()
 end)
 
--- 6. ระบบตรวจสอบแมพ
+-- 6. ระบบตรวจสอบแมพและโหลดสคริปต์หลัก
 task.spawn(function()
-    task.wait(1.5)
+    task.wait(1.5) -- หน่วงจำลองการโหลด
     
-    local mainPlaceId = 1908611568 -- ID หลักของเกม All Star Tower Defense
+    local astdPlaceId = 4996049426   -- ID หลักของเกม All Star Tower Defense (แก้ไขแล้ว)
+    local astdUniverseId = 1630139766 -- Universe ID ของ All Star Tower Defense (แก้ไขแล้ว)
     local currentPlaceId = game.PlaceId
+    local currentGameId = game.GameId
     
     local isASTD = false
-    if currentPlaceId == mainPlaceId then
+    
+    -- ตรวจสอบผ่าน Place ID หรือ Universe ID ตรงๆ
+    if currentPlaceId == astdPlaceId or currentGameId == astdUniverseId then
         isASTD = true
     else
+        -- ค้นหาเพิ่มเติมด้วยข้อความในชื่อแมพ (กันเหนียว)
         local successScan, placeInfo = pcall(function()
             return MarketplaceService:GetProductInfo(currentPlaceId)
         end)
         
         if successScan and placeInfo and placeInfo.Name then
-            if string.find(placeInfo.Name, "All Star Tower Defense") or string.find(placeInfo.Name, "ASTD") then
+            local lowerName = string.lower(placeInfo.Name)
+            if string.find(lowerName, "all star tower defense") or string.find(lowerName, "astd") then
                 isASTD = true
             end
         end
     end
     
-    -- 7. แสดงผลลัพธ์
+    -- 7. ผลลัพธ์การตรวจสอบ
     if isASTD then
         statusLabel.Text = "✅ ตรวจพบแมพ: All Star Tower Defense\nยินดีต้อนรับสู่ตัวช่วยเล่นของคุณ!"
-        statusLabel.TextColor3 = Color3.fromRGB(46, 204, 113)
-        
-        -- [[ คุณสามารถเพิ่มสคริปต์ความสามารถเด่น ๆ เช่น ออโต้สคิปเวฟ ตรงนี้ได้ในอนาคต ]]
+        statusLabel.TextColor3 = Color3.fromRGB(46, 204, 113) -- สีเขียวสำเร็จ
     else
         statusLabel.Text = "❌ ตรวจพบแมพอื่น! สคริปต์นี้รองรับเฉพาะ All Star Tower Defense เท่านั้น\n(รหัสแมพปัจจุบัน: " .. tostring(currentPlaceId) .. ")"
-        statusLabel.TextColor3 = Color3.fromRGB(231, 76, 60)
+        statusLabel.TextColor3 = Color3.fromRGB(231, 76, 60) -- สีแดงแจ้งเตือน
     end
 end)
-
