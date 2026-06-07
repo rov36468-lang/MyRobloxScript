@@ -31,7 +31,7 @@ local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
 mainFrame.Size = UDim2.new(0, 560, 0, 360)
 mainFrame.Position = UDim2.new(0.5, -280, 0.5, -180)
-mainFrame.BackgroundColor3 = Color3.fromRGB(24, 20, 36) -- สีม่วงเข้มโทนสไตล์อนิเมะ
+mainFrame.BackgroundColor3 = Color3.fromRGB(8, 14, 32) -- สีกรมเข้มโทนอนิเมะฟ้า
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
 mainFrame.Draggable = true
@@ -45,7 +45,7 @@ mainCorner.Parent = mainFrame
 local sidebar = Instance.new("Frame")
 sidebar.Name = "Sidebar"
 sidebar.Size = UDim2.new(0, 160, 1, 0)
-sidebar.BackgroundColor3 = Color3.fromRGB(18, 15, 27)
+sidebar.BackgroundColor3 = Color3.fromRGB(5, 10, 25)
 sidebar.BorderSizePixel = 0
 sidebar.Parent = mainFrame
 
@@ -58,19 +58,30 @@ local sidebarPatch = Instance.new("Frame")
 sidebarPatch.Name = "Patch"
 sidebarPatch.Size = UDim2.new(0, 20, 1, 0)
 sidebarPatch.Position = UDim2.new(1, -20, 0, 0)
-sidebarPatch.BackgroundColor3 = Color3.fromRGB(18, 15, 27)
+sidebarPatch.BackgroundColor3 = Color3.fromRGB(5, 10, 25)
 sidebarPatch.BorderSizePixel = 0
 sidebarPatch.Parent = sidebar
 
--- หัวข้อโลโก้ใน Sidebar (เปลี่ยนชื่อโปรเจกต์เป็น: พี่หล่อไหมน้อง)
+-- โลโก้รูปตัวละครอนิเมะ (ImageLabel)
+local logoImg = Instance.new("ImageLabel")
+logoImg.Name = "LogoImage"
+logoImg.Size = UDim2.new(0, 50, 0, 50)
+logoImg.Position = UDim2.new(0.5, -25, 0, 5)
+logoImg.BackgroundTransparency = 1
+logoImg.Image = "rbxassetid://7072706663" -- Anime girl silhouette asset
+logoImg.ImageColor3 = Color3.fromRGB(100, 210, 255)
+logoImg.Parent = sidebar
+
 local logoLabel = Instance.new("TextLabel")
 logoLabel.Name = "Logo"
 logoLabel.Size = UDim2.new(1, 0, 0, 60)
+logoLabel.Position = UDim2.new(0, 0, 0, 0)
 logoLabel.BackgroundTransparency = 1
-logoLabel.Text = "พี่หล่อไหมน้อง" -- ชื่อโลโก้หลัก
-logoLabel.TextColor3 = Color3.fromRGB(255, 215, 0) -- สีทอง
-logoLabel.TextSize = 16
+logoLabel.Text = "💠 พี่หล่อไหมน้อง"
+logoLabel.TextColor3 = Color3.fromRGB(100, 210, 255) -- สีฟ้าซีเรียน
+logoLabel.TextSize = 13
 logoLabel.Font = Enum.Font.GothamBold
+logoLabel.TextYAlignment = Enum.TextYAlignment.Bottom
 logoLabel.Parent = sidebar
 
 -- 4. คอนเทนเนอร์สำหรับใส่เฉพาะปุ่ม (Button Container)
@@ -133,7 +144,7 @@ local function createPage(pageName)
     header.Size = UDim2.new(1, 0, 0, 35)
     header.BackgroundTransparency = 1
     header.Text = pageName
-    header.TextColor3 = Color3.fromRGB(255, 255, 255)
+    header.TextColor3 = Color3.fromRGB(150, 225, 255)
     header.TextSize = 22
     header.Font = Enum.Font.GothamBold
     header.TextXAlignment = Enum.TextXAlignment.Left
@@ -151,7 +162,7 @@ local function createSubHeader(pageFrame, text, layoutOrder)
     subHeader.Size = UDim2.new(1, 0, 0, 24)
     subHeader.BackgroundTransparency = 1
     subHeader.Text = "📌 " .. text
-    subHeader.TextColor3 = Color3.fromRGB(255, 200, 50) -- สีเหลืองทองไฮไลท์
+    subHeader.TextColor3 = Color3.fromRGB(80, 200, 255) -- สีฟ้าซีเรียนไฮไลท์
     subHeader.TextSize = 14
     subHeader.Font = Enum.Font.GothamBold
     subHeader.TextXAlignment = Enum.TextXAlignment.Left
@@ -165,9 +176,9 @@ local function createListItem(pageFrame, text, layoutOrder)
     local item = Instance.new("TextLabel")
     item.Name = "Item_" .. text
     item.Size = UDim2.new(1, 0, 0, 32)
-    item.BackgroundColor3 = Color3.fromRGB(30, 25, 43) -- พื้นหลังกล่องย่อย
+    item.BackgroundColor3 = Color3.fromRGB(10, 20, 48) -- พื้นหลังกล่องย่อยโทนฟ้า
     item.Text = "   " .. text
-    item.TextColor3 = Color3.fromRGB(210, 210, 210)
+    item.TextColor3 = Color3.fromRGB(180, 225, 255)
     item.TextSize = 13
     item.Font = Enum.Font.GothamMedium
     item.TextXAlignment = Enum.TextXAlignment.Left
@@ -251,10 +262,10 @@ local function makeMenuButton(name, layoutOrder)
     local button = Instance.new("TextButton")
     button.Name = name .. "Btn"
     button.Size = UDim2.new(1, -20, 0, 36)
-    button.BackgroundColor3 = Color3.fromRGB(45, 36, 68)
+    button.BackgroundColor3 = Color3.fromRGB(20, 60, 130)
     button.BackgroundTransparency = 1
     button.Text = "  " .. name
-    button.TextColor3 = Color3.fromRGB(180, 180, 180)
+    button.TextColor3 = Color3.fromRGB(120, 170, 220)
     button.TextSize = 14
     button.Font = Enum.Font.GothamSemibold
     button.TextXAlignment = Enum.TextXAlignment.Left
@@ -275,14 +286,14 @@ local function makeMenuButton(name, layoutOrder)
             if child:IsA("TextButton") then
                 TweenService:Create(child, TweenInfo.new(0.2), {
                     BackgroundTransparency = 1,
-                    TextColor3 = Color3.fromRGB(180, 180, 180)
+                    TextColor3 = Color3.fromRGB(120, 170, 220)
                 }):Play()
             end
         end
         
         TweenService:Create(button, TweenInfo.new(0.2), {
             BackgroundTransparency = 0,
-            TextColor3 = Color3.fromRGB(255, 215, 0)
+            TextColor3 = Color3.fromRGB(100, 220, 255)
         }):Play()
         
         for pName, pFrame in pairs(pages) do
@@ -306,7 +317,7 @@ local btnSettings = makeMenuButton("ตั้งค่า", 5)
 
 -- ตั้งค่าเริ่มต้นที่หน้าแรก (หน้าหลัก)
 btnHome.BackgroundTransparency = 0
-btnHome.TextColor3 = Color3.fromRGB(255, 215, 0)
+btnHome.TextColor3 = Color3.fromRGB(100, 220, 255)
 pageHome.Visible = true
 
 -- 10. ปุ่มปิดเมนูหลัก (X)
@@ -314,7 +325,7 @@ local closeBtn = Instance.new("TextButton")
 closeBtn.Name = "CloseBtn"
 closeBtn.Size = UDim2.new(0, 30, 0, 30)
 closeBtn.Position = UDim2.new(1, -40, 0, 10)
-closeBtn.BackgroundColor3 = Color3.fromRGB(235, 77, 75)
+closeBtn.BackgroundColor3 = Color3.fromRGB(30, 100, 200)
 closeBtn.Text = "X"
 closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 closeBtn.TextSize = 14
