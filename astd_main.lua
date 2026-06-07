@@ -1,12 +1,11 @@
 -- =========================================================================
 -- ⭐ ALL STAR TOWER DEFENSE - MULTI-TAB GUI HACK (WITH SUB-HEADERS) ⭐
 -- =========================================================================
--- สคริปต์นี้สร้างหน้าต่างเมนูช่วยเล่น (Hub UI) ที่มาพร้อมกับระบบ Scrollable Page
--- และแสดง "หัวข้อเล็ก" (Sub-Headers) รวมถึงกล่องรายการแยกรายละเอียดด้านขวาในแต่ละแท็บอย่างสวยงาม
 
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
 local TweenService = game:GetService("TweenService")
+local MarketplaceService = game:GetService("MarketplaceService")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -52,7 +51,7 @@ local sidebarCorner = Instance.new("UICorner")
 sidebarCorner.CornerRadius = UDim.new(0, 16)
 sidebarCorner.Parent = sidebar
 
--- ตัวบังขอบมนขวาของ Sidebar
+-- ตัวบังขอบมนขวาของ Sidebar (แยกไว้นอกระบบ Layout เพื่อไม่ให้ดึงปุ่มลงไปด้านล่าง)
 local sidebarPatch = Instance.new("Frame")
 sidebarPatch.Name = "Patch"
 sidebarPatch.Size = UDim2.new(0, 20, 1, 0)
